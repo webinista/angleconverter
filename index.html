@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="keyword" description="">
+	<title>Angle Conversion</title>
+	<style type="text/css">
+		body{
+			font: 16px / 1.5 sans-serif;
+		}
+		input[type=number]{
+			font-family: monospace;
+			font-size: 1.3em;
+			padding: .5rem;
+			border:2px solid #eee;
+			text-align: ".";
+			margin-right: .1em;
+		}
+		input[type=number]:hover{
+			background: rgba(255, 255, 224,1);
+		}
+		input[type=number]:focus, a:focus, button:focus{
+			box-shadow: 0px 0px 15px #f03;
+			outline:none;
+		}
+		input[type=number]:focus{
+			background: rgba(255, 255, 224,1);
+		}
+		b{
+			display:block;
+		}
+		label{
+			font-family: monospace;
+		}
+		h1, body > p, form{
+			width: 50%;
+			margin:auto;
+		}
+		a:link{
+			color:#33f;
+		}
+		a:link, a:visited{
+			color:#00c;
+		}
+		a:hover{
+			color:#f03;
+		}
+		button{
+			background: #33f;
+			border: 2px outset #33f;
+			color:#fff;
+			font: inherit;
+			padding: .25em 1em;
+			font-weight:bold;
+		}
+		button:hover{
+			background: #f03;
+			border-color: #f03;
+		}
+	</style>
+</head>
+<body>
+<h1>Angle conversions</h1>
+<p>Convert between angle units. Enter a value in one field to see the converted value and units in another. Units are those allowed by the <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/">CSS Values and Units Module Level 3</a> specification.</p>
+<form id="angles">
+	<p>
+		<b>Degrees</b>
+		<input type="number" id="toDegrees" name="deg" value="360" step=".10"><label for="deg">deg</label>
+	</p>
+	
+	<p>
+		<b>Radians</b>
+		<input type="number" id="toRadians" name="rad" value="6.28318530718" step=".00000000001"><label for="rad">rad</label>
+	</p>
+
+	<p>
+		<b>Gradians</b>
+		<input type="number" id="toGradians" name="grad" value="400"><label for="grad">grad</label>
+	</p>
+
+	<p>
+		<b>Turns</b>
+		<input type="number" id="toTurns" name="turn" value="1" step=".05"><label for="turn">turn</label>
+	</p>
+	<button type="reset">Reset</button>
+</form>
+
+
+<script type="text/javascript" src="convertangles.min.js"></script>
+<script type="text/javascript">
+var Angles = new Angles();
+var inputs = document.querySelectorAll('input');
+	
+document.forms[0].addEventListener('submit',function(e){
+	e.preventDefault();
+},false)
+
+document.forms[0].addEventListener('input',function(e){
+	e.preventDefault();
+
+	Array.prototype.map.call( inputs, function( inp ){
+		var val = [];
+		val[0] = e.target.value;
+		val[1] = e.target.name;
+		
+		inp.value = Angles[ inp.id ]( val.join('') );
+		
+	});
+	
+},false)
+
+</script>
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
