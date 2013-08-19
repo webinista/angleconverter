@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="keyword" description="">
-	<title>Angle Conversion</title>
+	<title>Angle converter</title>
 	<style type="text/css">
 		body{
 			font: 16px / 1.5 sans-serif;
@@ -60,7 +60,7 @@
 	</style>
 </head>
 <body>
-<h1>Angle conversions</h1>
+<h1>Angle converter</h1>
 <p>Convert between angle units. Enter a value in one field to see the converted value and units in another. Units are those allowed by the <a href="http://www.w3.org/TR/2013/CR-css3-values-20130730/">CSS Values and Units Module Level 3</a> specification.</p>
 <form id="angles">
 	<p>
@@ -88,27 +88,30 @@
 
 <script type="text/javascript" src="convertangles.min.js"></script>
 <script type="text/javascript">
-var Angles = new Angles();
-var inputs = document.querySelectorAll('input');
+
+( function(d){
+
+   var Ang = new Angles(), 
+		form = d.forms[0], 
+	    inputs = d.querySelectorAll('input');
 	
-document.forms[0].addEventListener('submit',function(e){
-	e.preventDefault();
-},false)
+	form.addEventListener('submit',function(e){
+		e.preventDefault();
+	},false);
 
-document.forms[0].addEventListener('input',function(e){
-	e.preventDefault();
+	form.addEventListener('input',function(e){
+		e.preventDefault();
 
-	Array.prototype.map.call( inputs, function( inp ){
-		var val = [];
-		val[0] = e.target.value;
-		val[1] = e.target.name;
-		
-		inp.value = Angles[ inp.id ]( val.join('') );
-		
-	});
+		Array.prototype.map.call( inputs, function( inp ){
+			var val = [];
+			val[0] = e.target.value;
+			val[1] = e.target.name;
+			inp.value = Ang[ inp.id ]( val.join('') );	
+		});
+	},false);
 	
-},false)
-
+	
+} )(document)
 </script>
 
 
