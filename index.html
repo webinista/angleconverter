@@ -64,6 +64,9 @@
 			font-size: .8rem;
 			text-align: right;
 		}
+		.piletter{
+			font-family:serif;
+		}
 	</style>
 </head>
 <body>
@@ -77,7 +80,7 @@
 	
 	<p>
 		<b>Radians</b>
-		<input type="number" id="toRadians" name="rad" value="6.28318530718" step=".00000000001"><label for="rad">rad</label>
+		<input type="number" id="toRadians" name="rad" value="6.28318530718" step=".00000000001"><label for="rad">rad</label> (or <span id="pi">2</span><span class="piletter">&#960;</span>)
 	</p>
 
 	<p>
@@ -93,7 +96,7 @@
 </form>
 
 <footer>
-<p>&copy; 2013 <a href="http://tiffanybbrown.com/">Tiffany B. Brown</a> and <a href="http://webinista.com/">Webinista, Inc.</a>. Released under an <a href="LICENSE.md">MIT license</a>.</p>
+<p>&copy; 2013 <a href="http://tiffanybbrown.com/">Tiffany B. Brown</a> and <a href="http://webinista.com/">Webinista, Inc.</a>. Released under an <a href="LICENSE.md">MIT license</a>. (This doesn't work in IE8 because IE8 doesn't support <code>Array.prototype.map</code>. No point in polyfilling, since IE8 also doesn't support angle units.)</p>
 </footer>
 
 <script type="text/javascript" src="convertangles.min.js"></script>
@@ -108,6 +111,10 @@
 	form.addEventListener('submit',function(e){
 		e.preventDefault();
 	},false);
+	
+	form.addEventListener('reset',function(e){
+		document.getElementById('pi').innerHTML = 2;
+	},false);
 
 	form.addEventListener('input',function(e){
 		e.preventDefault();
@@ -118,6 +125,11 @@
 			val[1] = e.target.name;
 			inp.value = Ang[ inp.id ]( val.join('') );	
 		});
+		
+		var inPi = (+document.getElementById('toRadians').value) / Math.PI;
+		
+		document.getElementById('pi').innerHTML = inPi;
+		
 	},false);
 	
 } )(document)
